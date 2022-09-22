@@ -3,38 +3,35 @@ import boto3
 
 def download():
     s3_client = boto3.client('s3')
+    # Auswahl des Buckets und des Ordners im AWS S3
     response = s3_client.list_objects_v2(Bucket='wetterstationsbucket', Prefix='dataset/')
+    #Sortieren der des Ordners nach "zuletzt aktualisiert"
     objects = sorted(response['Contents'], key=lambda obj: obj['LastModified'])
     latest_object = objects[-1]['Key']
- #   filename = latest_object[latest_object.rfind('/') + 1:]  # Remove path
     # Download in aktuellen ordner
     s3_client.download_file('wetterstationsbucket', latest_object, 'D1.csv')
 
     response = s3_client.list_objects_v2(Bucket='wetterstationsbucket', Prefix='d3/')
     objects = sorted(response['Contents'], key=lambda obj: obj['LastModified'])
     latest_object = objects[-1]['Key']
- #   filename = latest_object[latest_object.rfind('/') + 1:]  # Remove path
     # Download in aktuellen ordner
     s3_client.download_file('wetterstationsbucket', latest_object, 'D3.csv')
 
     response = s3_client.list_objects_v2(Bucket='wetterstationsbucket', Prefix='d5/')
     objects = sorted(response['Contents'], key=lambda obj: obj['LastModified'])
     latest_object = objects[-1]['Key']
- #   filename = latest_object[latest_object.rfind('/') + 1:]  # Remove path
     # Download in aktuellen ordner
     s3_client.download_file('wetterstationsbucket', latest_object, 'D5.csv')
 
     response = s3_client.list_objects_v2(Bucket='wetterstationsbucket', Prefix='d6/')
     objects = sorted(response['Contents'], key=lambda obj: obj['LastModified'])
     latest_object = objects[-1]['Key']
- #   filename = latest_object[latest_object.rfind('/') + 1:]  # Remove path
-    # Download in aktuellen ordner
+   # Download in aktuellen ordner
     s3_client.download_file('wetterstationsbucket', latest_object, 'D6.csv')
 
     response = s3_client.list_objects_v2(Bucket='wetterstationsbucket', Prefix='d7/')
     objects = sorted(response['Contents'], key=lambda obj: obj['LastModified'])
     latest_object = objects[-1]['Key']
- #   filename = latest_object[latest_object.rfind('/') + 1:]  # Remove path
     # Download in aktuellen ordner
     s3_client.download_file('wetterstationsbucket', latest_object, 'D7.csv')
     # -------------------------------------------------------------------------------------------------------------
